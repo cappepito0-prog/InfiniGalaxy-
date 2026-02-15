@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfiniGalaxy | Tienda Oficial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Orbitron',sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top,#1a1a2e,#0f0c29,#000);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* Fondo animado */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:url("https://i.imgur.com/8bKQX9R.png");
+  animation:moveStars 120s linear infinite;
+  opacity:0.3;
+  z-index:-1;
+}
+
+@keyframes moveStars{
+  from{transform:translate(0,0);}
+  to{transform:translate(-500px,-500px);}
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  flex-wrap:wrap;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-area img{
+  width:55px;
+}
+
+.logo-area h1{
+  color:#00f7ff;
+}
+
+.nav-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.nav-buttons button{
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  background:linear-gradient(45deg,#00f7ff,#0066ff);
+  color:white;
+  transition:0.3s;
+}
+
+.nav-buttons button:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 15px #00f7ff;
+}
+
+/* SECTIONS */
+section{
+  padding:60px 20px;
+  display:none;
+  animation:fade 0.6s ease;
+}
+
+section.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+  font-size:2rem;
+  color:#00f7ff;
+}
+
+/* CARDS */
+.card-container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+}
+
+.card{
+  width:300px;
+  padding:25px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.1);
+  cursor:pointer;
+  transition:0.4s;
+  text-align:center;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 0 25px rgba(0,247,255,0.5);
+}
+
+.card img{
+  width:110px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin-bottom:10px;
+  color:#00f7ff;
+}
+
+/* INFO DESPLEGABLE */
+.info{
+  margin-top:15px;
+  text-align:left;
+  display:none;
+  animation:fade 0.5s ease;
+}
+
+.info.active{
+  display:block;
+}
+
+.info ul{
+  margin:10px 0;
+  padding-left:18px;
+}
+
+.info img{
+  width:120px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+/* BOTÓN COMPRA */
+.buy-btn{
+  margin-top:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  background:linear-gradient(45deg,#00ff99,#00cc66);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.buy-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px #00ff99;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.7);
+  margin-top:40px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .card{
+    width:90%;
+  }
+  header{
+    flex-direction:column;
+    gap:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-area">
+    <img src="logo.png" alt="Logo">
+    <h1>InfiniGalaxy</h1>
+  </div>
+
+  <div class="nav-buttons">
+    <button onclick="showSection('rangos')">Rangos</button>
+    <button onclick="showSection('crates')">Crates</button>
+  </div>
+</header>
+
+<!-- RANGOS -->
+<section id="rangos" class="active">
+  <h2 class="section-title">Rangos</h2>
+
+  <div class="card-container">
+
+    <!-- VIP Permanente -->
+    <div class="card" onclick="toggleInfo('vipperm')">
+      <img src="vip.png">
+      <h3>VIP Permanente</h3>
+      <div id="vipperm" class="info">
+        <p><strong>Duración:</strong> Permanente</p>
+
+        <p><strong>Comandos incluidos:</strong></p>
+        <ul>
+          <li>/home</li>
+          <li>/spawn</li>
+          <li>/kit vip</li>
+          <li>/fly</li>
+        </ul>
+
+        <p><strong>TAG del rango:</strong></p>
+        <img src="tag-vip.png">
+
+        <p><strong>Kit disponible:</strong></p>
+        <img src="kit-vip.png">
+
+        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='comprar-vip.html'">
+        Comprar
+        </button>
+      </div>
+    </div>
+
+    <!-- VIP 30 días -->
+    <div class="card" onclick="toggleInfo('vip30')">
+      <img src="vip.png">
+      <h3>VIP 30 Días</h3>
+      <div id="vip30" class="info">
+        <p><strong>Duración:</strong> 30 días</p>
+
+        <p><strong>Comandos incluidos:</strong></p>
+        <ul>
+          <li>/home</li>
+          <li>/spawn</li>
+          <li>/kit vip</li>
+        </ul>
+
+        <p><strong>TAG del rango:</strong></p>
+        <img src="tag-vip.png">
+
+        <p><strong>Kit disponible:</strong></p>
+        <img src="kit-vip30.png">
+
+        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='comprar-vip30.html'">
+        Comprar
+        </button>
+      </div>
+    </div>
+
+    <!-- VIP++ -->
+    <div class="card" onclick="toggleInfo('vipplus')">
+      <img src="vipplus.png">
+      <h3>VIP++ Permanente</h3>
+      <div id="vipplus" class="info">
+        <p><strong>Duración:</strong> Permanente</p>
+
+        <p><strong>Comandos incluidos:</strong></p>
+        <ul>
+          <li>/home</li>
+          <li>/spawn</li>
+          <li>/kit vipplus</li>
+          <li>/fly</li>
+          <li>/hat</li>
+          <li>/ec</li>
+        </ul>
+
+        <p><strong>TAG del rango:</strong></p>
+        <img src="tag-vipplus.png">
+
+        <p><strong>Kit disponible:</strong></p>
+        <img src="kit-vipplus.png">
+
+        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='comprar-vipplus.html'">
+        Comprar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CRATES -->
+<section id="crates">
+  <h2 class="section-title">Crates</h2>
+
+  <div class="card-container">
+
+    <div class="card" onclick="toggleInfo('rara')">
+      <img src="crate-rara.png">
+      <h3>Llave Rara</h3>
+      <div id="rara" class="info">
+        <p>Incluye recompensas raras y especiales.</p>
+        <img src="crate-rara-preview.png">
+        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='comprar-rara.html'">
+        Comprar
+        </button>
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo('epica')">
+      <img src="crate-epica.png">
+      <h3>Llave Épica</h3>
+      <div id="epica" class="info">
+        <p>Recompensas épicas exclusivas.</p>
+        <img src="crate-epica-preview.png">
+        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='comprar-epica.html'">
+        Comprar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+© 2026 InfiniGalaxy | Todos los derechos reservados
+</footer>
+
+<script>
+function showSection(id){
+  document.querySelectorAll("section").forEach(sec=>sec.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function toggleInfo(id){
+  document.getElementById(id).classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
