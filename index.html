@@ -21,7 +21,6 @@ body{
   overflow-x:hidden;
 }
 
-/* Fondo animado */
 body::before{
   content:"";
   position:fixed;
@@ -38,7 +37,6 @@ body::before{
   to{transform:translate(-500px,-500px);}
 }
 
-/* HEADER */
 header{
   display:flex;
   justify-content:space-between;
@@ -88,7 +86,6 @@ header{
   box-shadow:0 0 15px #00f7ff;
 }
 
-/* SECTIONS */
 section{
   padding:60px 20px;
   display:none;
@@ -111,7 +108,6 @@ section.active{
   color:#00f7ff;
 }
 
-/* CARDS */
 .card-container{
   display:flex;
   flex-wrap:wrap;
@@ -146,12 +142,10 @@ section.active{
   color:#00f7ff;
 }
 
-/* INFO DESPLEGABLE */
 .info{
   margin-top:15px;
   text-align:left;
   display:none;
-  animation:fade 0.5s ease;
 }
 
 .info.active{
@@ -163,13 +157,25 @@ section.active{
   padding-left:18px;
 }
 
-.info img{
+.tag-img{
   width:120px;
   margin:10px 0;
   border-radius:10px;
 }
 
-/* BOTÓN COMPRA */
+.kit-img{
+  width:150px;
+  margin:10px 0;
+  border-radius:12px;
+}
+
+.kit-only-img{
+  width:200px;
+  margin:15px auto;
+  display:block;
+  border-radius:15px;
+}
+
 .buy-btn{
   margin-top:10px;
   padding:10px 15px;
@@ -178,7 +184,6 @@ section.active{
   font-weight:bold;
   background:linear-gradient(45deg,#00ff99,#00cc66);
   cursor:pointer;
-  transition:0.3s;
 }
 
 .buy-btn:hover{
@@ -186,7 +191,6 @@ section.active{
   box-shadow:0 0 15px #00ff99;
 }
 
-/* FOOTER */
 footer{
   text-align:center;
   padding:20px;
@@ -194,15 +198,9 @@ footer{
   margin-top:40px;
 }
 
-/* RESPONSIVE */
 @media(max-width:768px){
-  .card{
-    width:90%;
-  }
-  header{
-    flex-direction:column;
-    gap:15px;
-  }
+  .card{ width:90%; }
+  header{ flex-direction:column; gap:15px; }
 }
 </style>
 </head>
@@ -211,140 +209,188 @@ footer{
 
 <header>
   <div class="logo-area">
-    <img src="logo.png" alt="Logo">
+    <img src="logo.png">
     <h1>InfiniGalaxy</h1>
   </div>
 
   <div class="nav-buttons">
     <button onclick="showSection('rangos')">Rangos</button>
+    <button onclick="showSection('rangos-temp')">Rangos Temporales</button>
+    <button onclick="showSection('kits')">Kits</button>
     <button onclick="showSection('crates')">Crates</button>
   </div>
 </header>
 
-<!-- RANGOS -->
+<!-- RANGOS PERMANENTES -->
 <section id="rangos" class="active">
-  <h2 class="section-title">Rangos</h2>
+<h2 class="section-title">Rangos Permanentes</h2>
+<div class="card-container">
 
-  <div class="card-container">
+<div class="card" onclick="toggleInfo('vip')">
+<img src="vip.jpg">
+<h3>VIP Permanente</h3>
+<div id="vip" class="info">
+<ul>
+<li>/home</li>
+<li>/spawn</li>
+<li>/kit vip</li>
+<li>/fly</li>
+</ul>
+<p><strong>TAG:</strong></p>
+<img src="tag-vip.png" class="tag-img">
+<p><strong>Kit:</strong></p>
+<img src="kit-vip.png" class="kit-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-    <!-- VIP Permanente -->
-    <div class="card" onclick="toggleInfo('vipperm')">
-      <img src="vip.jpg">
-      <h3>VIP Permanente</h3>
-      <div id="vipperm" class="info">
-        <p><strong>Duración:</strong> Permanente</p>
+<div class="card" onclick="toggleInfo('vipplus')">
+<img src="vip++.jpg">
+<h3>VIP++ Permanente</h3>
+<div id="vipplus" class="info">
+<ul>
+<li>Todo VIP</li>
+<li>/hat</li>
+<li>/ec</li>
+</ul>
+<p><strong>TAG:</strong></p>
+<img src="tag-vipplus.png" class="tag-img">
+<p><strong>Kit:</strong></p>
+<img src="kit-vipplus.png" class="kit-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <p><strong>Comandos incluidos:</strong></p>
-        <ul>
-          <li>/home</li>
-          <li>/spawn</li>
-          <li>/kit vip</li>
-          <li>/fly</li>
-        </ul>
+<div class="card" onclick="toggleInfo('galaxy')">
+<img src="galaxy.jpg">
+<h3>Galaxy Permanente</h3>
+<div id="galaxy" class="info">
+<ul>
+<li>Beneficios exclusivos</li>
+<li>/fly</li>
+<li>/kit galaxy</li>
+</ul>
+<p><strong>TAG:</strong></p>
+<img src="tag-galaxy.png" class="tag-img">
+<p><strong>Kit:</strong></p>
+<img src="kit-galaxy.png" class="kit-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <p><strong>TAG del rango:</strong></p>
-        <img src="tag.png">
+</div>
+</section>
 
-        <p><strong>Kit disponible:</strong></p>
-        <img src="kit-vip.png">
+<!-- RANGOS TEMPORALES -->
+<section id="rangos-temp">
+<h2 class="section-title">Rangos Temporales</h2>
+<div class="card-container">
 
-        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511452'">
-        Comprar
-        </button>
-      </div>
-    </div>
+<div class="card" onclick="toggleInfo('vip30')">
+<img src="vip30d.jpg">
+<h3>VIP 30 Días</h3>
+<div id="vip30d" class="info">
+<p>Accede a beneficios VIP durante 30 días. Ideal para probar el rango antes de obtenerlo permanente.</p>
+<p><strong>Duración:</strong> 30 días</p>
+<p><strong>TAG:</strong></p>
+<img src="tag-vip.png" class="tag-img">
+<p><strong>Kit incluido:</strong></p>
+<img src="kit-vip.png" class="kit-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-    <!-- VIP 30 días -->
-    <div class="card" onclick="toggleInfo('vip30')">
-      <img src="vip30d.jpg">
-      <h3>VIP 30 Días</h3>
-      <div id="vip30" class="info">
-        <p><strong>Duración:</strong> 30 días</p>
+<div class="card" onclick="toggleInfo('galaxy30')">
+<img src="galaxy30d.jpg">
+<h3>Galaxy 30 Días</h3>
+<div id="galaxy30" class="info">
+<p>Disfruta del rango Galaxy por tiempo limitado con acceso a comandos y ventajas exclusivas.</p>
+<p><strong>Duración:</strong> 30 días</p>
+<p><strong>TAG:</strong></p>
+<img src="tag-galaxy.png" class="tag-img">
+<p><strong>Kit incluido:</strong></p>
+<img src="kit-galaxy.png" class="kit-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <p><strong>Comandos incluidos:</strong></p>
-        <ul>
-          <li>/home</li>
-          <li>/spawn</li>
-          <li>/kit vip</li>
-        </ul>
+</div>
+</section>
 
-        <p><strong>TAG del rango:</strong></p>
-        <img src="tag.png">
+<!-- KITS -->
+<section id="kits">
+<h2 class="section-title">Kits Exclusivos</h2>
+<div class="card-container">
 
-        <p><strong>Kit disponible:</strong></p>
-        <img src="kit-vip30.png">
+<div class="card" onclick="toggleInfo('sol')">
+<img src="kit-sol.jpg">
+<h3>Kit Sol</h3>
+<div id="sol" class="info">
+<p>Un kit equilibrado perfecto para comenzar con ventaja en el servidor.</p>
+<img src="kit-sol-preview.png" class="kit-only-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511005'">
-        Comprar
-        </button>
-      </div>
-    </div>
+<div class="card" onclick="toggleInfo('marte')">
+<img src="kit-marte.jpg">
+<h3>Kit Marte</h3>
+<div id="marte" class="info">
+<p>Ideal para PvP intenso con equipo resistente y mejoras ofensivas.</p>
+<img src="kit-marte-preview.png" class="kit-only-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-    <!-- VIP++ -->
-    <div class="card" onclick="toggleInfo('vipplus')">
-      <img src="vip++.jpg">
-      <h3>VIP++ Permanente</h3>
-      <div id="vipplus" class="info">
-        <p><strong>Duración:</strong> Permanente</p>
+<div class="card" onclick="toggleInfo('jupiter')">
+<img src="kit-jupiter.jpg">
+<h3>Kit Júpiter</h3>
+<div id="jupiter" class="info">
+<p>Incluye encantamientos avanzados y herramientas superiores.</p>
+<img src="kit-jupiter-preview.png" class="kit-only-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <p><strong>Comandos incluidos:</strong></p>
-        <ul>
-          <li>/home</li>
-          <li>/spawn</li>
-          <li>/kit vipplus</li>
-          <li>/fly</li>
-          <li>/hat</li>
-          <li>/ec</li>
-        </ul>
+<div class="card" onclick="toggleInfo('tierra')">
+<img src="kit-tierra.jpg">
+<h3>Kit Tierra</h3>
+<div id="tierra" class="info">
+<p>Balance perfecto entre defensa y ataque para cualquier estilo de juego.</p>
+<img src="kit-tierra-preview.png" class="kit-only-img">
+<button class="buy-btn">Comprar</button>
+</div>
+</div>
 
-        <p><strong>TAG del rango:</strong></p>
-        <img src="tag.png">
-
-        <p><strong>Kit disponible:</strong></p>
-        <img src="kit-vipplus.png">
-
-        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511449'">
-        Comprar
-        </button>
-      </div>
-    </div>
-
-  </div>
+</div>
 </section>
 
 <!-- CRATES -->
 <section id="crates">
-  <h2 class="section-title">Crates</h2>
+<h2 class="section-title">Crates</h2>
+<div class="card-container">
 
-  <div class="card-container">
+<div class="card" onclick="toggleInfo('rara')">
+<img src="crate-epica.png">
+<h3>Llave Rara</h3>
+<div id="rara" class="info">
+<p>Llave especial con recompensas poco comunes.</p>
+<img src="Inventario-epica.png" class="kit-img">
+<button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511728'">Comprar</button>
+</div>
+</div>
 
-    <div class="card" onclick="toggleInfo('rara')">
-      <img src="crate-epica.png">
-      <h3>Llave Rara</h3>
-      <div id="rara" class="info">
-        <p>IUna llave especial con recompensas poco comunes. Úsala en las cajas raras para obtener premios exclusivos, objetos mejorados y sorpresas que te darán ventaja en tu aventura. 
-          ¡La suerte puede estar de tu lado!</p>
-        <img src="Inventario-epica.png">
-        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511728'">
-        Comprar
-        </button>
-      </div>
-    </div>
+<div class="card" onclick="toggleInfo('epica')">
+<img src="crate-rara.png">
+<h3>Llave Épica</h3>
+<div id="epica" class="info">
+<p>Llave con recompensas épicas exclusivas.</p>
+<img src="Inventario-rara.png" class="kit-img">
+<button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511725'">Comprar</button>
+</div>
+</div>
 
-    <div class="card" onclick="toggleInfo('epica')">
-      <img src="crate-rara.png">
-      <h3>Llave Épica</h3>
-      <div id="epica" class="info">
-        <p>Una llave de alto nivel que desbloquea recompensas épicas y objetos poderosos. Contiene premios exclusivos, equipo mejorado y grandes sorpresas que pueden cambiar tu destino en el servidor. 
-          ¡Solo los más afortunados obtendrán lo mejor!</p>
-        <img src="Inventario-rara.png">
-        <button class="buy-btn" onclick="event.stopPropagation(); window.location.href='https://minefoxx.craftingstore.net/package/1511725'">
-        Comprar
-        </button>
-      </div>
-    </div>
-
-  </div>
+</div>
 </section>
 
 <footer>
@@ -356,7 +402,6 @@ function showSection(id){
   document.querySelectorAll("section").forEach(sec=>sec.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
-
 function toggleInfo(id){
   document.getElementById(id).classList.toggle("active");
 }
